@@ -1,0 +1,36 @@
+{
+  "name": "recipes.js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "build": "babel src --out-dir dist",
+    "dev": "nodemon --watch src --exec 'npm run build && node dist/app.js'",
+    "start": "npm run build && node dist/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lfresnog/Weather.js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lfresnog/Weather.js/issues"
+  },
+  "homepage": "https://github.com/lfresnog/Weather.js#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.6.2",
+    "@babel/core": "^7.6.2",
+    "@babel/node": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "nodemon": "^1.19.3"
+  },
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "graphql-yoga": "^1.18.3",
+    "request": "^2.88.0",
+    "uuid": "^3.3.3",
+    "yargs": "^14.0.0"
+  }
+}
