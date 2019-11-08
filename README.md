@@ -125,6 +125,22 @@ mutation{
 }
 ```
 
+- Update an author
+
+```js
+mutation{
+  updateAuthor(name:"Luis",n_name:"Hector")
+}
+```
+
+- Update a ingredient
+
+```js
+mutation{
+updateIngredient(name:"Lechuga",n_name:"Lechuga1")
+}
+```
+
 ## ⚖️ License
 
 This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/JaimeDordio/rickymorty/blob/master/LICENSE) file for details

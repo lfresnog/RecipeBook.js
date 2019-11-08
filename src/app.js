@@ -50,9 +50,11 @@ type Mutation{
     addRecipe(title:String!,description:String!,mail:String!,ingredients:[String!]!):Recipe!
     addAuthor(name:String!,mail:String!):Author!
     addIngredient(name:String!):Ingredient!
-    deleteRecipe(name: String!) : String!
-    deleteAuthor(name: String!): String!
+    deleteRecipe(name:String!) : String!
+    deleteAuthor(name:String!): String!
     deleteIngredient(name: String!): String!
+    updateAuthor(name:String!,n_name:String,n_mail:String):String!
+    updateIngredient(name:String!,n_name:String!):String!
 }
 `
 const resolvers = {
@@ -101,9 +103,8 @@ const resolvers = {
                 throw new Error (`Mail: ${mail} doesnt exist`);
             }
             const author = authorData.find(elem => elem.mail == mail);
-            const id = uuid.v1();
             const n_recipe = {
-                id,
+                id: uuid.v1(),
                 title,
                 description,
                 date: new Date().getDate(),
@@ -117,9 +118,8 @@ const resolvers = {
             const {name,mail} = args; 
             if(authorData.some(elem => elem.name === name)){
                 throw new Error (`User name ${name} already in use`);
-              }
-            const id = uuid.v4();
-            const n_author = {id,name,mail};
+            }
+            const n_author = {id:uuid.v4(),name,mail};
             authorData.push(n_author);
             return n_author;
         },
@@ -128,8 +128,7 @@ const resolvers = {
             if(ingredientData.some(elem => elem.name === name)){
                 throw new Error(`Name ${name} alredy exist`);
             }
-            const id = uuid.v4();
-            const n_ingredient = {id,name};
+            const n_ingredient = {id: uuid.v4(),name};
             ingredientData.push(n_ingredient);
             return n_ingredient;
         },
@@ -166,6 +165,17 @@ const resolvers = {
             const index_ingredient = ingredientData.findIndex(elem => elem.name === args.name);
             ingredientData.splice(index_ingredient,1);
             return "Deleted";
+        },
+        updateAuthor(parent,args,ctx,info){
+            const f_author = authorData.find(elem => elem.name === args.name);
+            f_author.name = args.n_name || f_author.name;
+            f_author.email = args.n_mail || f_author.mail;
+            return "Updated";
+        },
+        updateIngredient(parent,args,ctx,info){
+            const f_ingredient = ingredientData.find(elem => elem.name === args.name);
+            f_ingredient.name = args.n_name;
+            return "Updated";
         }
     }
 }
