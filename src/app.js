@@ -90,7 +90,7 @@ const resolvers = {
         },
         ingredientRecipes(parent, args, ctx, info){
             const f_ingredient = ingredientData.find(elem => elem.name == args.name);
-            return recipeData.filter(elem => elem.ingredients.includes(parent.id))
+            return recipeData.filter(elem => elem.ingredients.includes(f_ingredient.id))
         }
     },
     Mutation:{
